@@ -1,0 +1,1995 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LegalAssist AI - Professional Legal Services in India</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Lato:wght@300;400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            /* Professional Law Firm Color Palette */
+            --primary-color: #14213d;
+            /* Navy blue */
+            --secondary-color: #8a0000;
+            /* Deep burgundy red */
+            --accent-color: #b49a67;
+            /* Gold accent */
+            --light-color: #f5f5f5;
+            --light-gray: #e9e9e9;
+            --dark-color: #222222;
+            --text-color: #333333;
+            --border-radius: 4px;
+            --border-radius-sm: 2px;
+            --shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+            --container-width: 1200px;
+            --serif-font: 'Cormorant Garamond', serif;
+            --sans-font: 'Lato', sans-serif;
+        }
+
+        [data-theme="dark"] {
+            --primary-color: #2d4a7a;
+            --secondary-color: #aa2b2b;
+            --accent-color: #d5c28f;
+            --light-color: #1e1e2d;
+            --light-gray: #2d3748;
+            --dark-color: #f8fafc;
+            --text-color: #e2e8f0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--light-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: background-color 0.3s ease;
+            font-family: var(--sans-font);
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: var(--serif-font);
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .container {
+            width: 100%;
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: white;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        [data-theme="dark"] header {
+            background-color: var(--light-color);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-family: var(--serif-font);
+            font-size: 1.75rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .logo i {
+            color: var(--secondary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+            padding: 5px 0;
+            font-family: var(--serif-font);
+            font-size: 1.1rem;
+        }
+
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--secondary-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary-color);
+        }
+
+        .nav-links a:hover:after {
+            width: 100%;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .theme-toggle {
+            background: var(--light-gray);
+            border: none;
+            color: var(--primary-color);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .theme-toggle:hover {
+            background: var(--accent-color);
+            color: white;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 20px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+        }
+
+        .mobile-menu-btn span {
+            display: block;
+            width: 100%;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: var(--transition);
+        }
+
+        /* Hero Section */
+        .hero {
+            background-image: linear-gradient(rgba(20, 33, 61, 0.85), rgba(20, 33, 61, 0.85)), url('./assets/banner.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(20, 33, 61, 0.7);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            cursor: pointer;
+            font-size: 1rem;
+            text-align: center;
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #6d0000;
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-accent {
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+        }
+
+        .btn-accent:hover {
+            background-color: #a08954;
+        }
+
+        /* Services Section */
+        .service-areas {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+            color: var(--primary-color);
+            padding-bottom: 15px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--secondary-color);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            color: var(--text-color);
+            font-size: 1.1rem;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border-top: 3px solid var(--accent-color);
+        }
+
+        [data-theme="dark"] .service-card {
+            background-color: var(--light-color);
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .service-icon {
+            width: 70px;
+            height: 70px;
+            background-color: var(--light-gray);
+            color: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+
+        .service-title {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .service-description {
+            color: var(--text-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .service-link {
+            color: var(--secondary-color);
+            text-decoration: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .service-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Why Choose Us Section */
+        .why-choose-us {
+            padding: 80px 0;
+            background-color: var(--light-gray);
+        }
+
+        [data-theme="dark"] .why-choose-us {
+            background-color: var(--primary-color);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-item {
+            text-align: center;
+            padding: 1.5rem;
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+
+        .feature-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            color: var(--primary-color);
+        }
+
+        [data-theme="dark"] .feature-title {
+            color: white;
+        }
+
+        .feature-description {
+            color: var(--text-color);
+        }
+
+        [data-theme="dark"] .feature-description {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* How It Works Section */
+        .how-it-works {
+            padding: 80px 0;
+            position: relative;
+            background-color: white;
+        }
+
+        [data-theme="dark"] .how-it-works {
+            background-color: var(--light-color);
+        }
+
+        .steps-container {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 3rem 0;
+        }
+
+        .step {
+            display: flex;
+            gap: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .step-number {
+            flex-shrink: 0;
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: 600;
+            position: relative;
+            z-index: 2;
+        }
+
+        .step-content {
+            padding-bottom: 3rem;
+        }
+
+        .step-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .step-description {
+            color: var(--text-color);
+        }
+
+        .step-connector {
+            position: absolute;
+            top: 50px;
+            left: 25px;
+            width: 2px;
+            height: calc(100% - 50px);
+            background-color: var(--light-gray);
+            z-index: 1;
+        }
+
+        .step:last-child .step-content {
+            padding-bottom: 0;
+        }
+
+        .step:last-child .step-connector {
+            display: none;
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            padding: 80px 0;
+            background-color: var(--light-gray);
+            position: relative;
+        }
+
+        [data-theme="dark"] .testimonials {
+            background-color: rgba(20, 30, 40, 1);
+        }
+
+        .testimonials-container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        [data-theme="dark"] .testimonial-card {
+            background-color: var(--light-color);
+        }
+
+        .testimonial-content {
+            flex-grow: 1;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+            position: relative;
+            padding-left: 1.5rem;
+            border-left: 3px solid var(--accent-color);
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .author-info h4 {
+            margin-bottom: 0.2rem;
+            color: var(--primary-color);
+        }
+
+        .author-info p {
+            font-size: 0.9rem;
+            color: var(--text-color);
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            padding: 80px 0;
+            background-color: white;
+        }
+
+        [data-theme="dark"] .faq-section {
+            background-color: var(--light-color);
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            border: 1px solid var(--light-gray);
+            border-radius: var(--border-radius);
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 500;
+            color: var(--primary-color);
+            background-color: var(--light-gray);
+            transition: background-color 0.3s ease;
+        }
+
+        [data-theme="dark"] .faq-question {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .faq-question:hover {
+            background-color: #e0e0e0;
+        }
+
+        [data-theme="dark"] .faq-question:hover {
+            background-color: #24385c;
+        }
+
+        .faq-question i {
+            transition: var(--transition);
+        }
+
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            padding: 0 1.5rem;
+            color: var(--text-color);
+            background-color: white;
+        }
+
+        [data-theme="dark"] .faq-answer {
+            background-color: var(--light-color);
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 1000px;
+            padding: 1.5rem;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            padding: 80px 0;
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .contact-title {
+            color: white;
+        }
+
+        .contact-subtitle {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .contact-item i {
+            font-size: 1.5rem;
+            color: var(--accent-color);
+        }
+
+        .contact-form {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            color: var(--text-color);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid var(--light-gray);
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            font-family: var(--sans-font);
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .cta-title {
+            color: white;
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-description {
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 4rem 0 2rem;
+        }
+
+        [data-theme="dark"] footer {
+            background-color: #0f172a;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-logo {
+            font-family: var(--serif-font);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .footer-logo i {
+            color: var(--accent-color);
+        }
+
+        .footer-column h3 {
+            color: white;
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--accent-color);
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .footer-contact {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .footer-contact-item {
+            display: flex;
+            gap: 10px;
+        }
+
+        .footer-contact-item i {
+            color: var(--accent-color);
+        }
+
+        .company-description {
+            opacity: 0.7;
+            line-height: 1.8;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .copyright {
+            opacity: 0.6;
+            font-size: 0.9rem;
+        }
+
+        .footer-social-icons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .footer-social-icons a {
+            color: white;
+            background-color: rgba(255, 255, 255, 0.1);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .footer-social-icons a:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-3px);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 70%;
+            max-width: 300px;
+            height: 100%;
+            background-color: white;
+            z-index: 1001;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            overflow-y: auto;
+        }
+
+        [data-theme="dark"] .mobile-menu {
+            background-color: var(--light-color);
+        }
+
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+
+        .mobile-menu-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: transparent;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-color);
+        }
+
+        .mobile-nav-links {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .mobile-nav-links a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.2rem;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: var(--serif-font);
+        }
+
+        .mobile-nav-links a:hover {
+            color: var(--secondary-color);
+        }
+
+        .mobile-nav-links a i {
+            width: 24px;
+        }
+
+        /* Legal Expertise Section */
+        .expertise-section {
+            padding: 80px 0;
+            background-color: white;
+        }
+
+        [data-theme="dark"] .expertise-section {
+            background-color: var(--light-color);
+        }
+
+        .expertise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .expertise-item {
+            padding: 2rem;
+            border: 1px solid var(--light-gray);
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+        }
+
+        .expertise-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .expertise-icon {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .expertise-title {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .expertise-list {
+            list-style: none;
+        }
+
+        .expertise-list li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .expertise-list li:before {
+            content: '\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: var(--secondary-color);
+        }
+
+        /* Team Section */
+        .team-section {
+            padding: 80px 0;
+            background-color: var(--light-gray);
+        }
+
+        [data-theme="dark"] .team-section {
+            background-color: rgba(20, 30, 40, 1);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .team-member {
+            background-color: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        [data-theme="dark"] .team-member {
+            background-color: var(--light-color);
+        }
+
+        .team-member:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .team-photo {
+            height: 250px;
+            background-color: var(--light-gray);
+            position: relative;
+        }
+
+        .team-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .team-info {
+            padding: 1.5rem;
+        }
+
+        .team-name {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        .team-position {
+            font-size: 0.9rem;
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+
+        .team-bio {
+            color: var(--text-color);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .team-social {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .team-social a {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: var(--light-gray);
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .team-social a:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        /* Media Queries */
+        @media (max-width: 991px) {
+            .hero-title {
+                font-size: 2.8rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: flex;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .cta-title {
+                font-size: 1.8rem;
+            }
+
+            .footer-content {
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 2.2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+
+            .btn {
+                padding: 0.7rem 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            .hero-cta {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 2.2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+
+            .btn {
+                padding: 0.7rem 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            .hero-cta {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="container">
+            <nav>
+                <a href="landing.html" class="logo">
+                    <i class="fas fa-balance-scale"></i>
+                    <span>LegalAssist AI</span>
+                </a>
+                <div class="nav-links">
+                    <a href="#services">Services</a>
+                    <a href="#expertise">Practice Areas</a>
+                    <a href="#about">About Us</a>
+                    <a href="#testimonials">Client Stories</a>
+                    <a href="#contact">Contact</a>
+                    <a href="law-chat.html" class="nav-cta">AI Assistant</a>
+                    <a href="https://f245fe9db904e5a6e8.gradio.live" class="nav-cta">NyaaySaathi</a>
+                </div>
+                <div class="nav-actions">
+                    <button class="theme-toggle" id="themeToggle">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <button class="mobile-menu-btn" id="mobileMenuBtn">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="mobile-menu-close" id="mobileMenuClose">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="mobile-nav-links">
+            <a href="#services"><i class="fas fa-briefcase"></i> Services</a>
+            <a href="#expertise"><i class="fas fa-gavel"></i> Practice Areas</a>
+            <a href="#about"><i class="fas fa-users"></i> About Us</a>
+            <a href="#testimonials"><i class="fas fa-quote-right"></i> Client Stories</a>
+            <a href="#contact"><i class="fas fa-envelope"></i> Contact</a>
+            <a href="law-chat.html"><i class="fas fa-robot"></i> AI Legal Assistant</a>
+            <a href="index.html"><i class="fas fa-file-contract"></i> Document Generator</a>
+            <a href="#" class="btn-get-started"><i class="fas fa-user-plus"></i> Free Consultation</a>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Professional Legal Solutions Powered by AI</h1>
+                <p class="hero-subtitle">LegalAssist AI brings together experienced legal professionals and cutting-edge
+                    technology to provide comprehensive legal services across India. From documentation to legal
+                    representation, we're your trusted partner for all legal matters.</p>
+                <div class="hero-cta">
+                    <a href="#contact" class="btn btn-primary">Schedule Free Consultation</a>
+                    <a href="#services" class="btn btn-secondary">Explore Our Services</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="service-areas" id="services">
+        <div class="container">
+            <h2 class="section-title">Our Legal Services</h2>
+            <p class="section-subtitle">Comprehensive legal solutions tailored to your specific needs, combining human
+                expertise with advanced AI technology.</p>
+
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-file-contract"></i>
+                    </div>
+                    <h3 class="service-title">Legal Document Generation</h3>
+                    <p class="service-description">Instantly create legally binding documents customized to your
+                        specific requirements and jurisdictional needs, including agreements, contracts, wills, and
+                        more.</p>
+                    <a href="index.html" class="service-link">Generate Documents <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <h3 class="service-title">Lawyer Consultation</h3>
+                    <p class="service-description">Connect with experienced attorneys specialized in your specific legal
+                        matter for personalized advice and representation through video calls or in-person meetings.</p>
+                    <a href="law-chat.html" class="service-link">Find a Lawyer <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3 class="service-title">NyaayBot</h3>
+                    <p class="service-description">Get instant answers to common legal questions, explanations of
+                        complex legal concepts, and guidance through various legal processes with our AI assistant.</p>
+                    <a href="law-chat.html" class="service-link">Ask Questions <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3 class="service-title">Legal Research</h3>
+                    <p class="service-description">Access our comprehensive database of Indian laws, case precedents,
+                        and legal articles to find information relevant to your situation and make informed decisions.
+                    </p>
+                    <a href="law-chat.html" class="service-link">Research Laws <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-clipboard-check"></i>
+                    </div>
+                    <h3 class="service-title">NyaayBot2.0</h3>
+                    <p class="service-description">Have our AI analyze your existing legal documents for potential
+                        issues, inconsistencies, or missing clauses with expert recommendations for improvements.</p>
+                    <a href="index.html" class="service-link">Review Documents <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-clipboard-check"></i>
+                    </div>
+                    <h3 class="service-title">NyaaySaathi</h3>
+                    <p class="service-description">Have our AI bot solve your legal queries, in multiple Indian
+                        Languages. Made for your ease! </p>
+                    <a href="https://f245fe9db904e5a6e8.gradio.live" class="service-link">Chat with our bot <i
+                            class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-tasks"></i>
+                    </div>
+                    <h3 class="service-title">Case Management</h3>
+                    <p class="service-description">Track all your legal matters in one secure platform with deadline
+                        reminders, document storage, and communication logs related to your cases.</p>
+                    <a href="law-chat.html" class="service-link">Manage Cases <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Practice Areas Section -->
+    <section class="expertise-section" id="expertise">
+        <div class="container">
+            <h2 class="section-title">Practice Areas</h2>
+            <p class="section-subtitle">Our team specializes in a wide range of legal matters to serve individuals and
+                businesses across India.</p>
+
+            <div class="expertise-grid">
+                <div class="expertise-item">
+                    <div class="expertise-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h3 class="expertise-title">Property Law</h3>
+                    <ul class="expertise-list">
+                        <li>Residential & Commercial Property Transactions</li>
+                        <li>Lease Agreements & Rent Disputes</li>
+                        <li>Property Registration & Documentation</li>
+                        <li>Joint Development Agreements</li>
+                        <li>Title Verification & Due Diligence</li>
+                    </ul>
+                </div>
+
+                <div class="expertise-item">
+                    <div class="expertise-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <h3 class="expertise-title">Corporate & Business Law</h3>
+                    <ul class="expertise-list">
+                        <li>Company Formation & Registration</li>
+                        <li>Contract Drafting & Negotiation</li>
+                        <li>Compliance & Regulatory Matters</li>
+                        <li>Mergers & Acquisitions</li>
+                        <li>Intellectual Property Protection</li>
+                    </ul>
+                </div>
+
+                <div class="expertise-item">
+                    <div class="expertise-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 class="expertise-title">Family Law</h3>
+                    <ul class="expertise-list">
+                        <li>Divorce & Separation Proceedings</li>
+                        <li>Child Custody & Maintenance</li>
+                        <li>Marriage Registration</li>
+                        <li>Adoption Legal Services</li>
+                        <li>Will Creation & Succession Planning</li>
+                    </ul>
+                </div>
+
+                <div class="expertise-item">
+                    <div class="expertise-icon">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <h3 class="expertise-title">Employment Law</h3>
+                    <ul class="expertise-list">
+                        <li>Employment Contracts & Agreements</li>
+                        <li>Workplace Dispute Resolution</li>
+                        <li>HR Policy Development</li>
+                        <li>Termination & Severance Matters</li>
+                        <li>Labor Compliance & Regulations</li>
+                    </ul>
+                </div>
+
+                <div class="expertise-item">
+                    <div class="expertise-icon">
+                        <i class="fas fa-gavel"></i>
+                    </div>
+                    <h3 class="expertise-title">Civil Litigation</h3>
+                    <ul class="expertise-list">
+                        <li>Commercial Dispute Resolution</li>
+                        <li>Consumer Protection Cases</li>
+                        <li>Debt Recovery & Enforcement</li>
+                        <li>Breach of Contract Litigation</li>
+                        <li>Alternative Dispute Resolution</li>
+                    </ul>
+                </div>
+
+                <div class="expertise-item">
+                    <div class="expertise-icon">
+                        <i class="fas fa-landmark"></i>
+                    </div>
+                    <h3 class="expertise-title">Constitutional & Administrative Law</h3>
+                    <ul class="expertise-list">
+                        <li>Fundamental Rights Protection</li>
+                        <li>Public Interest Litigation</li>
+                        <li>Government Policy Challenges</li>
+                        <li>Administrative Appeals</li>
+                        <li>Statutory Interpretation</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section class="why-choose-us" id="about">
+        <div class="container">
+            <h2 class="section-title">Why Choose LegalAssist AI</h2>
+            <p class="section-subtitle">Our unique combination of legal expertise and advanced technology delivers
+                superior results for our clients.</p>
+
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-balance-scale"></i>
+                    </div>
+                    <h3 class="feature-title">Expert Legal Knowledge</h3>
+                    <p class="feature-description">All our services are backed by experienced attorneys with decades of
+                        combined experience in various legal domains.</p>
+                </div>
+
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3 class="feature-title">Fast Response Time</h3>
+                    <p class="feature-description">Our AI systems provide immediate assistance, and our lawyers respond
+                        to urgent matters within hours, not days.</p>
+                </div>
+
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-rupee-sign"></i>
+                    </div>
+                    <h3 class="feature-title">Transparent Pricing</h3>
+                    <p class="feature-description">Clear fee structures with no hidden costs. Pay only for the services
+                        you need with various pricing options.</p>
+                </div>
+
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <h3 class="feature-title">Confidentiality Assured</h3>
+                    <p class="feature-description">Advanced security protocols and strict confidentiality policies
+                        protect all your sensitive legal information.</p>
+                </div>
+
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-language"></i>
+                    </div>
+                    <h3 class="feature-title">Multilingual Support</h3>
+                    <p class="feature-description">Services available in English, Hindi, and major regional languages to
+                        better serve clients across India.</p>
+                </div>
+
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3 class="feature-title">24/7 Availability</h3>
+                    <p class="feature-description">Our AI legal assistant is available round-the-clock to address your
+                        queries whenever they arise.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team-section">
+        <div class="container">
+            <h2 class="section-title">Our Legal Team</h2>
+            <p class="section-subtitle">Meet our experienced attorneys who combine their legal expertise with
+                cutting-edge technology to deliver exceptional results.</p>
+
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="team-photo">
+                        <img src="data:image/jpeg;base64,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"
+                            alt="Rajiv Sharma">
+                    </div>
+                    <div class="team-info">
+                        <h3 class="team-name">Fali Sam Nariman</h3>
+                        <p class="team-position">Managing Partner, Corporate Law</p>
+                        <p class="team-bio">With over 20 years of experience in corporate law, Rajiv specializes in
+                            mergers & acquisitions, corporate restructuring, and commercial contracts.</p>
+                        <div class="team-social">
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="team-member">
+                    <div class="team-photo">
+                        <img src="https://cf-img-a-in.tosshub.com/sites/visualstory/stories/2023_09/story_60693/assets/4.jpeg?time=1693896226"
+                            alt="Priya Mehta">
+                    </div>
+                    <div class="team-info">
+                        <h3 class="team-name">Harish Salve</h3>
+                        <p class="team-position">Senior Partner, Property Law</p>
+                        <p class="team-bio">Priya has handled over 500 property transactions and specializes in complex
+                            real estate matters, title disputes, and property documentation.</p>
+                        <div class="team-social">
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="team-member">
+                    <div class="team-photo">
+                        <img src="https://media.licdn.com/dms/image/v2/D5612AQFk7y51t853dg/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1706543679186?e=2147483647&v=beta&t=1Qm-LSQfGc3aO0oAqF5eUBgMsyhB8Jsoa8L4veg3abc"
+                            alt="Arjun Kapoor">
+                    </div>
+                    <div class="team-info">
+                        <h3 class="team-name">Gopal Subramanium</h3>
+                        <p class="team-position">Partner, Family & Civil Law</p>
+                        <p class="team-bio">Arjun handles family law matters including divorce, custody, and succession
+                            planning with a compassionate and pragmatic approach.</p>
+                        <div class="team-social">
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="team-member">
+                    <div class="team-photo">
+                        <img src="https://th-i.thgim.com/public/opinion/open-page/50o9uj/article30232614.ece/alternates/FREE_1200/02TH-THGRP-PARASARAN"
+                            alt="Neha Singh">
+                    </div>
+                    <div class="team-info">
+                        <h3 class="team-name">K. Parasaran</h3>
+                        <p class="team-position">Partner, Technology & IP Law</p>
+                        <p class="team-bio">Neha specializes in intellectual property protection, technology contracts,
+                            and data privacy compliance for businesses of all sizes.</p>
+                        <div class="team-social">
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="container">
+            <h2 class="section-title">Our Process</h2>
+            <p class="section-subtitle">We've streamlined the legal assistance process to make it efficient and
+                user-friendly.</p>
+
+            <div class="steps-container">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-connector"></div>
+                    <div class="step-content">
+                        <h3 class="step-title">Initial Consultation</h3>
+                        <p class="step-description">Begin with a free consultation where we assess your legal needs and
+                            identify the appropriate services. You can choose between AI-powered assistance or direct
+                            lawyer consultation based on your requirement's complexity.</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-connector"></div>
+                    <div class="step-content">
+                        <h3 class="step-title">Legal Strategy Development</h3>
+                        <p class="step-description">Our team develops a customized strategy for your legal matter. For
+                            documentation needs, our AI prepares initial drafts that are then reviewed by our legal
+                            experts to ensure accuracy and compliance with current laws.</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-connector"></div>
+                    <div class="step-content">
+                        <h3 class="step-title">Solution Implementation</h3>
+                        <p class="step-description">We execute the agreed-upon legal strategy, whether it's finalizing
+                            documents, representing you in negotiations, providing legal opinions, or guiding you
+                            through self-help processes with our AI assistant.</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Follow-up Support</h3>
+                        <p class="step-description">Even after your immediate legal need is addressed, we provide
+                            ongoing support through our platform. Store your documents securely, track important dates,
+                            and access our team for future legal matters with your history on record.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="container testimonials-container">
+            <h2 class="section-title">Client Testimonials</h2>
+            <p class="section-subtitle">See what our clients have to say about their experience with LegalAssist AI.</p>
+
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        As a small business owner, I regularly need legal documents and occasional advice. LegalAssist
+                        has saved me thousands in legal fees while providing reliable, high-quality legal services on
+                        demand.
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">RM</div>
+                        <div class="author-info">
+                            <h4>Rahul Mehta</h4>
+                            <p>Small Business Owner, Mumbai</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        The ability to chat with qualified lawyers within minutes of encountering a legal issue was
+                        game-changing for me. Clear pricing, excellent advice, and the document storage feature keeps
+                        everything organized.
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">AP</div>
+                        <div class="author-info">
+                            <h4>Aisha Patel</h4>
+                            <p>HR Manager, Bangalore</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        The AI legal assistant answered my questions about starting a business at 2 AM when I was
+                        brainstorming. Then it helped me create all the initial paperwork I needed to get started.
+                        Invaluable service!
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">SK</div>
+                        <div class="author-info">
+                            <h4>Suresh Kumar</h4>
+                            <p>Entrepreneur, Delhi</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        As a property manager, I've used the platform to generate over 100 rental agreements. The
+                        consistency and customization options available are excellent, and our legal compliance has
+                        never been better.
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">PG</div>
+                        <div class="author-info">
+                            <h4>Priya Gupta</h4>
+                            <p>Property Manager, Pune</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section" id="faq">
+        <div class="container">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <p class="section-subtitle">Find answers to common questions about our services and legal matters.</p>
+
+            <div class="faq-container">
+                <div class="faq-item active">
+                    <div class="faq-question">
+                        What types of legal services does LegalAssist provide?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        LegalAssist offers a comprehensive suite of legal services, including AI-powered document
+                        generation for various legal requirements (contracts, agreements, wills, etc.), lawyer
+                        consultation services connecting you with qualified legal professionals, AI legal assistant for
+                        answering questions and explaining concepts, legal research tools, document review services, and
+                        case management. Our platform is designed to address most common legal needs for individuals and
+                        small businesses.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        How much do the services cost?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        We offer various pricing options to suit different needs. Basic document generation starts at
+                        ₹499 per document, with subscription plans available from ₹999 per month for unlimited document
+                        creation. Lawyer consultations are priced based on the lawyer's experience and specialization,
+                        starting at ₹1,500 for a 30-minute consultation. We also offer a free tier that includes access
+                        to our AI legal assistant for basic questions and guidance. Detailed pricing is available on our
+                        pricing page.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Are the lawyers on your platform qualified?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Yes, all lawyers available for consultation through our platform are verified professionals. We
+                        conduct thorough background checks, verify bar council registrations, and evaluate their
+                        experience before they can offer services through LegalAssist. Each lawyer profile displays
+                        their qualifications, specializations, years of experience, and client reviews to help you make
+                        an informed choice. We maintain strict quality standards and regularly review lawyer performance
+                        based on client feedback.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Is my legal information secure on your platform?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Absolutely. We implement bank-level security measures to protect your sensitive legal
+                        information. All data is encrypted both in transit and at rest using advanced encryption
+                        protocols. We maintain strict access controls, and your documents are stored in secure cloud
+                        environments compliant with international security standards. Additionally, our privacy policy
+                        ensures we never share your information with third parties without your explicit consent. For
+                        document generation, you can opt to process data locally in your browser for maximum privacy.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Can LegalAssist handle complex legal situations?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        LegalAssist is designed to handle a wide range of legal needs, from simple document generation
+                        to moderate complexity legal questions. However, for highly complex legal situations,
+                        specialized legal fields, or high-stakes litigation, our platform serves as an excellent
+                        starting point but may recommend direct, in-depth consultation with specialized attorneys. Our
+                        AI will recognize when a matter exceeds its capabilities and will guide you toward appropriate
+                        professional legal help. We aim to complement traditional legal services, providing affordable
+                        access to legal assistance while acknowledging the limitations of technology.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+        <div class="container">
+            <h2 class="section-title contact-title">Contact Us</h2>
+            <p class="section-subtitle contact-subtitle">Get in touch with our team for any inquiries or to schedule a
+                consultation.</p>
+
+            <div class="contact-container">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h4>Office Location</h4>
+                            <p>Legal Center, 23rd Floor, Cyber City,<br>Bandra Kurla Complex, Mumbai 400051</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <i class="fas fa-phone-alt"></i>
+                        <div>
+                            <h4>Phone Numbers</h4>
+                            <p>Main: +91 9876 543 210<br>Support: +91 8765 432 109</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h4>Email Addresses</h4>
+                            <p>General: info@legalassist.com<br>Support: support@legalassist.com</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <h4>Office Hours</h4>
+                            <p>Monday to Friday: 9:00 AM to 6:00 PM<br>Saturday: 10:00 AM to 2:00 PM</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-form">
+                    <h3>Send Us a Message</h3>
+                    <form>
+                        <div class="form-group">
+                            <label class="form-label">Your Name</label>
+                            <input type="text" class="form-control" placeholder="Enter your full name">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Email Address</label>
+                            <input type="email" class="form-control" placeholder="Enter your email">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Phone Number</label>
+                            <input type="tel" class="form-control" placeholder="Enter your phone number">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Legal Matter</label>
+                            <select class="form-control">
+                                <option>Select your legal area of concern</option>
+                                <option>Property Law</option>
+                                <option>Corporate & Business Law</option>
+                                <option>Family Law</option>
+                                <option>Employment Law</option>
+                                <option>Civil Litigation</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Your Message</label>
+                            <textarea class="form-control"
+                                placeholder="Please describe your legal issue or inquiry"></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Submit Request</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-title">Ready to Resolve Your Legal Matters?</div>
+            <p class="cta-description">Whether you need document preparation, legal advice, or full representation, our
+                team is ready to assist you with technology-enhanced legal solutions.</p>
+            <div class="hero-cta">
+                <a href="#contact" class="btn btn-accent">Schedule Free Consultation</a>
+                <a href="law-chat.html" class="btn btn-secondary">Try AI Assistant Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <div class="footer-logo">
+                        <i class="fas fa-balance-scale"></i>
+                        <span>LegalAssist AI</span>
+                    </div>
+                    <p class="company-description">LegalAssist AI combines legal expertise with cutting-edge technology
+                        to provide accessible, affordable, and efficient legal services for individuals and businesses
+                        across India.</p>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <div class="footer-links">
+                        <a href="#">Home</a>
+                        <a href="#services">Services</a>
+                        <a href="#expertise">Practice Areas</a>
+                        <a href="#about">About Us</a>
+                        <a href="#testimonials">Testimonials</a>
+                        <a href="#contact">Contact</a>
+                    </div>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Legal Resources</h3>
+                    <div class="footer-links">
+                        <a href="#">Legal Articles</a>
+                        <a href="#">Document Templates</a>
+                        <a href="#">Legal FAQs</a>
+                        <a href="#">Legal Guides</a>
+                        <a href="#">Video Resources</a>
+                    </div>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Contact Information</h3>
+                    <div class="footer-contact">
+                        <div class="footer-contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>info@legalassist.com</span>
+                        </div>
+                        <div class="footer-contact-item">
+                            <i class="fas fa-phone-alt"></i>
+                            <span>+91 9876 543 210</span>
+                        </div>
+                        <div class="footer-contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Legal Center, Cyber City, Mumbai</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p class="copyright">© 2025 LegalAssist AI. All rights reserved.</p>
+                <div class="footer-social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Theme Toggle Functionality
+            const themeToggle = document.getElementById('themeToggle');
+            let darkMode = false;
+
+            themeToggle.addEventListener('click', function () {
+                darkMode = !darkMode;
+                if (darkMode) {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                    themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+                } else {
+                    document.documentElement.removeAttribute('data-theme');
+                    themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+                }
+            });
+
+            // Mobile Menu Toggle
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const mobileMenuClose = document.getElementById('mobileMenuClose');
+
+            mobileMenuBtn.addEventListener('click', function () {
+                mobileMenu.classList.add('active');
+            });
+
+            mobileMenuClose.addEventListener('click', function () {
+                mobileMenu.classList.remove('active');
+            });
+
+            // FAQ Accordion
+            const faqItems = document.querySelectorAll('.faq-item');
+
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+
+                question.addEventListener('click', function () {
+                    item.classList.toggle('active');
+                });
+            });
+
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]:not(.mobile-nav-links a)').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    const targetId = this.getAttribute('href');
+
+                    if (targetId === '#') return;
+
+                    e.preventDefault();
+
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Mobile Nav Smooth Scroll
+            document.querySelectorAll('.mobile-nav-links a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+
+                    if (targetId === '#') return;
+
+                    mobileMenu.classList.remove('active');
+
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

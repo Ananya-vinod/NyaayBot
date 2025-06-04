@@ -1,0 +1,1392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LegalAssist AI - Indian Law Assistant</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            /* Professional Law Firm Color Palette */
+            --primary-color: #14213d; /* Navy blue */
+            --secondary-color: #8a0000; /* Deep burgundy red */
+            --accent-color: #b49a67; /* Gold accent */
+            --light-color: #f5f5f5;
+            --light-gray: #e9e9e9;
+            --dark-color: #222222;
+            --text-color: #333333;
+            --border-radius: 4px;
+            --border-radius-sm: 2px;
+            --shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+            --container-width: 1200px;
+            --serif-font: 'Cormorant Garamond', serif;
+            --sans-font: 'Lato', sans-serif;
+        }
+
+        [data-theme="dark"] {
+            --primary-color: #2d4a7a;
+            --secondary-color: #aa2b2b;
+            --accent-color: #d5c28f;
+            --light-color: #1e1e2d;
+            --light-gray: #2d3748;
+            --dark-color: #f8fafc;
+            --text-color: #e2e8f0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--light-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: background-color 0.3s ease;
+            font-family: var(--sans-font);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--serif-font);
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .container {
+            width: 100%;
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: white;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        [data-theme="dark"] header {
+            background-color: var(--light-color);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-family: var(--serif-font);
+            font-size: 1.75rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .logo i {
+            color: var(--secondary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+            padding: 5px 0;
+            font-family: var(--serif-font);
+            font-size: 1.1rem;
+        }
+
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--secondary-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary-color);
+        }
+
+        .nav-links a:hover:after {
+            width: 100%;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .theme-toggle {
+            background: var(--light-gray);
+            border: none;
+            color: var(--primary-color);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .theme-toggle:hover {
+            background: var(--accent-color);
+            color: white;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 20px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+        }
+
+        .mobile-menu-btn span {
+            display: block;
+            width: 100%;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: var(--transition);
+        }
+
+        /* Main chat interface */
+        .main-content {
+            display: flex;
+            padding: 2rem 0;
+            min-height: calc(100vh - 80px);
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 300px;
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 1.5rem;
+            margin-right: 2rem;
+            height: calc(100vh - 140px);
+            position: sticky;
+            top: 100px;
+            overflow-y: auto;
+        }
+
+        [data-theme="dark"] .sidebar {
+            background-color: var(--light-color);
+        }
+
+        .sidebar-title {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 2px solid var(--accent-color);
+            color: var(--primary-color);
+        }
+
+        .category {
+            margin-bottom: 1.5rem;
+        }
+
+        .category-title {
+            font-size: 1.1rem;
+            margin-bottom: 0.8rem;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .category-title i {
+            color: var(--secondary-color);
+        }
+
+        .category-items {
+            list-style: none;
+            margin-left: 1.5rem;
+        }
+
+        .category-items li {
+            margin-bottom: 0.5rem;
+        }
+
+        .category-items li a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .category-items li a:hover {
+            color: var(--secondary-color);
+        }
+
+        .category-items li a i {
+            font-size: 0.8rem;
+            color: var(--accent-color);
+        }
+
+        .suggested-question {
+            padding: 0.8rem;
+            background-color: var(--light-gray);
+            border-radius: var(--border-radius);
+            margin-bottom: 0.8rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .suggested-question:hover {
+            background-color: var(--accent-color);
+            color: white;
+        }
+
+        /* Chat container */
+        .chat-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            height: calc(100vh - 140px);
+            overflow: hidden;
+        }
+
+        [data-theme="dark"] .chat-container {
+            background-color: var(--light-color);
+        }
+
+        .chat-header {
+            padding: 1.2rem 1.5rem;
+            border-bottom: 1px solid var(--light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .chat-title {
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .chat-title i {
+            color: var(--secondary-color);
+        }
+
+        .chat-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .chat-action {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--text-color);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .chat-action:hover {
+            color: var(--secondary-color);
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 1.5rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .message {
+            max-width: 80%;
+            position: relative;
+        }
+
+        .user-message {
+            align-self: flex-end;
+            background-color: #e7f0ff;
+            color: var(--dark-color);
+            padding: 1rem;
+            border-radius: 10px;
+            border-bottom-right-radius: 0;
+        }
+
+        .bot-message {
+            align-self: flex-start;
+            background-color: var(--light-gray);
+            padding: 1rem;
+            border-radius: 10px;
+            border-bottom-left-radius: 0;
+            border-left: 4px solid var(--secondary-color);
+        }
+
+        .message-time {
+            font-size: 0.75rem;
+            color: #777;
+            margin-top: 0.4rem;
+            text-align: right;
+        }
+
+        .message-typing {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            padding: 0.5rem 1rem;
+            background-color: var(--light-gray);
+            border-radius: 10px;
+            align-self: flex-start;
+            margin-top: 0.5rem;
+        }
+
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--secondary-color);
+            border-radius: 50%;
+            opacity: 0.7;
+            animation: typing-animation 1s infinite ease-in-out;
+        }
+
+        .typing-dot:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .typing-dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes typing-animation {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+
+        .chat-input-container {
+            padding: 1.2rem 1.5rem;
+            border-top: 1px solid var(--light-gray);
+        }
+
+        .chat-input-wrapper {
+            display: flex;
+            gap: 1rem;
+            position: relative;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 1rem;
+            border: 1px solid var(--light-gray);
+            border-radius: 10px;
+            resize: none;
+            height: 60px;
+            max-height: 150px;
+            font-family: var(--sans-font);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .chat-input:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 2px rgba(180, 154, 103, 0.2);
+        }
+
+        .chat-submit {
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            width: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+            align-self: flex-end;
+            height: 60px;
+        }
+
+        .chat-submit:hover {
+            background-color: var(--primary-color);
+        }
+
+        .disclaimer {
+            font-size: 0.8rem;
+            color: #777;
+            margin-top: 0.8rem;
+            text-align: center;
+        }
+
+        /* Popular topics section */
+        .popular-topics {
+            margin-top: 1.5rem;
+        }
+
+        .topics-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.8rem;
+        }
+
+        .topic-item {
+            padding: 0.8rem;
+            background-color: var(--light-gray);
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .topic-item:hover {
+            background-color: var(--accent-color);
+            color: white;
+        }
+
+        /* Mobile menu */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 70%;
+            max-width: 300px;
+            height: 100%;
+            background-color: white;
+            z-index: 1001;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            overflow-y: auto;
+        }
+
+        [data-theme="dark"] .mobile-menu {
+            background-color: var(--light-color);
+        }
+
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+
+        .mobile-menu-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: transparent;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-color);
+        }
+
+        .mobile-nav-links {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .mobile-nav-links a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.2rem;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: var(--serif-font);
+        }
+
+        .mobile-nav-links a:hover {
+            color: var(--secondary-color);
+        }
+
+        .mobile-nav-links a i {
+            width: 24px;
+        }
+
+        /* API status indicator */
+        .api-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.3rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            background-color: var(--light-gray);
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .api-status.online .status-dot {
+            background-color: #4caf50;
+        }
+
+        .api-status.offline .status-dot {
+            background-color: #f44336;
+        }
+
+        .api-status.connecting .status-dot {
+            background-color: #ff9800;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.3;
+            }
+        }
+
+        /* Citation style */
+        .citation {
+            font-size: 0.85rem;
+            color: #666;
+            margin-top: 0.5rem;
+            border-left: 2px solid var(--accent-color);
+            padding-left: 0.8rem;
+        }
+
+        /* Bot message formatting */
+        .bot-message h3 {
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+            font-size: 1.1rem;
+        }
+
+        .bot-message p {
+            margin-bottom: 0.8rem;
+        }
+
+        .bot-message ul, .bot-message ol {
+            margin-left: 1.5rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .bot-message li {
+            margin-bottom: 0.3rem;
+        }
+
+        .bot-message a {
+            color: var(--secondary-color);
+            text-decoration: none;
+        }
+
+        .bot-message a:hover {
+            text-decoration: underline;
+        }
+
+        .bot-message code {
+            font-family: monospace;
+            background-color: rgba(0, 0, 0, 0.05);
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            font-size: 0.9em;
+        }
+
+        .bot-message strong {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .bot-message em {
+            font-style: italic;
+        }
+
+        /* Legal reference styling */
+        .legal-reference {
+            background-color: rgba(180, 154, 103, 0.1);
+            padding: 0.8rem;
+            border-radius: var(--border-radius);
+            margin: 0.8rem 0;
+            border-left: 3px solid var(--accent-color);
+        }
+
+        .legal-reference-title {
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+            color: var(--primary-color);
+        }
+
+        /* Notification */
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 1rem;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-lg);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            max-width: 300px;
+        }
+
+        .notification.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .notification.error {
+            background-color: #e53935;
+        }
+
+        .notification.success {
+            background-color: #43a047;
+        }
+
+        /* Media queries */
+        @media (max-width: 991px) {
+            .sidebar {
+                width: 250px;
+            }
+            
+            .category-title {
+                font-size: 1rem;
+            }
+            
+            .category-items li a {
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                margin-right: 0;
+                margin-bottom: 1.5rem;
+                height: auto;
+                max-height: 300px;
+                position: relative;
+                top: 0;
+            }
+            
+            .chat-container {
+                height: 60vh;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: flex;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 1rem;
+            }
+            
+            .chat-header {
+                padding: 1rem;
+            }
+            
+            .chat-messages {
+                padding: 1rem;
+            }
+            
+            .chat-input-container {
+                padding: 1rem;
+            }
+            
+            .bot-message, .user-message {
+                max-width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">
+                    <i class="fas fa-balance-scale"></i>
+                    <span>LegalAssist AI</span>
+                </a>
+                <div class="nav-links">
+                    <a href="index.html">Home</a>
+                    <a href="#">Services</a>
+                    <a href="#">Practice Areas</a>
+                    <a href="#">About Us</a>
+                    <a href="#">Contact</a>
+                </div>
+                <div class="nav-actions">
+                    <button class="theme-toggle" id="themeToggle">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <button class="mobile-menu-btn" id="mobileMenuBtn">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="mobile-menu-close" id="mobileMenuClose">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="mobile-nav-links">
+            <a href="index.html"><i class="fas fa-home"></i> Home</a>
+            <a href="#"><i class="fas fa-briefcase"></i> Services</a>
+            <a href="#"><i class="fas fa-gavel"></i> Practice Areas</a>
+            <a href="#"><i class="fas fa-users"></i> About Us</a>
+            <a href="#"><i class="fas fa-envelope"></i> Contact</a>
+            <a href="#"><i class="fas fa-file-contract"></i> Document Generator</a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <h3 class="sidebar-title">Indian Legal Topics</h3>
+            
+            <div class="category">
+                <h4 class="category-title"><i class="fas fa-home"></i> Property Law</h4>
+                <ul class="category-items">
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Rental Agreements</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Property Registration</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Tenant Rights</a></li>
+                </ul>
+            </div>
+            
+            <div class="category">
+                <h4 class="category-title"><i class="fas fa-users"></i> Family Law</h4>
+                <ul class="category-items">
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Marriage & Divorce</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Child Custody</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Inheritance</a></li>
+                </ul>
+            </div>
+            
+            <div class="category">
+                <h4 class="category-title"><i class="fas fa-building"></i> Corporate Law</h4>
+                <ul class="category-items">
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Business Registration</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> GST & Taxation</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Labour Laws</a></li>
+                </ul>
+            </div>
+            
+            <div class="popular-topics">
+                <h4 class="category-title"><i class="fas fa-question-circle"></i> Popular Questions</h4>
+                <div class="topics-grid">
+                    <div class="topic-item">Rights under RTI</div>
+                    <div class="topic-item">Motor vehicle law</div>
+                    <div class="topic-item">Legal heirs</div>
+                    <div class="topic-item">Consumer rights</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Chat Container -->
+        <div class="chat-container">
+            <div class="chat-header">
+                <div class="chat-title">
+                    <i class="fas fa-robot"></i>
+                    Indian Law Assistant
+                    <div class="api-status online" id="apiStatus">
+                        <span class="status-dot"></span>
+                        <span class="status-text">Online</span>
+                    </div>
+                </div>
+                <div class="chat-actions">
+                    <div class="chat-action" id="clearChat">
+                        <i class="fas fa-trash"></i>
+                        Clear Chat
+                    </div>
+                    <div class="chat-action" id="exportChat">
+                        <i class="fas fa-download"></i>
+                        Export
+                    </div>
+                </div>
+            </div>
+            
+            <div class="chat-messages" id="chatMessages">
+                <!-- Bot welcome message will be added by JS -->
+            </div>
+            
+            <div class="chat-input-container">
+                <div class="chat-input-wrapper">
+                    <textarea class="chat-input" id="userInput" placeholder="Ask any legal question related to Indian law..."></textarea>
+                    <button class="chat-submit" id="sendButton">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+                <div class="disclaimer">
+                    Information provided is for general guidance only and not legal advice. Consult a qualified lawyer for specific legal matters.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Elements
+            const chatMessages = document.getElementById('chatMessages');
+            const userInput = document.getElementById('userInput');
+            const sendButton = document.getElementById('sendButton');
+            const clearChatButton = document.getElementById('clearChat');
+            const exportChatButton = document.getElementById('exportChat');
+            const apiStatus = document.getElementById('apiStatus');
+            const themeToggle = document.getElementById('themeToggle');
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const mobileMenuClose = document.getElementById('mobileMenuClose');
+            const topicItems = document.querySelectorAll('.topic-item');
+            const sidebarLinks = document.querySelectorAll('.category-items li a');
+            
+            // Variables
+            let conversationHistory = [];
+            let isTyping = false;
+            let darkMode = false;
+            let apiAvailable = false;
+            
+            // Constants
+            const API_URL = 'http://localhost:3000/api/gemini';
+            const INITIAL_PROMPT = `You are an AI assistant specializing in Indian law. You provide helpful, accurate information about Indian legal matters in a clear, professional manner. Always cite relevant sections of laws or precedents when applicable. Remember that you're providing general information, not legal advice, and users should consult qualified lawyers for specific issues.`;
+            
+            // Check API availability
+            checkApiAvailability();
+            
+            // Add welcome message
+            addBotMessage(`<h3>Welcome to LegalAssist AI</h3>
+            <p>I'm your Indian legal assistant, here to provide information on Indian laws, legal procedures, and rights. I can help with questions about:</p>
+            <ul>
+                <li>Property and rental laws</li>
+                <li>Family law matters (marriage, divorce, inheritance)</li>
+                <li>Business and corporate regulations</li>
+                <li>Constitutional rights</li>
+                <li>Criminal and civil procedures</li>
+            </ul>
+            <p>How can I assist you today?</p>`);
+            
+            // Event Listeners
+            sendButton.addEventListener('click', handleUserInput);
+            
+            userInput.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    handleUserInput();
+                }
+                
+                // Auto resize textarea
+                setTimeout(() => {
+                    this.style.height = 'auto';
+                    this.style.height = Math.min(this.scrollHeight, 150) + 'px';
+                }, 0);
+            });
+            
+            // Clear chat event
+            clearChatButton.addEventListener('click', function() {
+                if (confirm('Are you sure you want to clear the chat history?')) {
+                    chatMessages.innerHTML = '';
+                    conversationHistory = [];
+                    addBotMessage(`<p>Chat history has been cleared. How can I assist you with Indian legal matters today?</p>`);
+                }
+            });
+            
+            // Export chat
+            exportChatButton.addEventListener('click', function() {
+                exportChatHistory();
+            });
+            
+            // Theme toggle
+            themeToggle.addEventListener('click', function() {
+                darkMode = !darkMode;
+                if (darkMode) {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                    themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+                } else {
+                    document.documentElement.removeAttribute('data-theme');
+                    themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+                }
+            });
+            
+            // Mobile menu
+            mobileMenuBtn.addEventListener('click', function() {
+                mobileMenu.classList.add('active');
+            });
+            
+            mobileMenuClose.addEventListener('click', function() {
+                mobileMenu.classList.remove('active');
+            });
+            
+            // Topic items click events
+            topicItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    userInput.value = this.textContent;
+                    handleUserInput();
+                });
+            });
+            
+            // Sidebar link click events
+            sidebarLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    userInput.value = this.textContent;
+                    handleUserInput();
+                });
+            });
+            
+            // Functions
+            async function checkApiAvailability() {
+                updateApiStatus('connecting');
+                
+                try {
+                    const healthCheck = await fetch('http://localhost:3000/api/health');
+                    
+                    if (healthCheck.ok) {
+                        const data = await healthCheck.json();
+                        
+                        if (data.apiAccessible) {
+                            apiAvailable = true;
+                            updateApiStatus('online');
+                            console.log('API connected successfully');
+                        } else {
+                            apiAvailable = false;
+                            updateApiStatus('offline');
+                            showNotification('API is unavailable. Running in offline mode.', 'error');
+                            console.warn('API health check failed:', data.message);
+                        }
+                    } else {
+                        throw new Error('Health check failed');
+                    }
+                } catch (error) {
+                    apiAvailable = false;
+                    updateApiStatus('offline');
+                    showNotification('Could not connect to the server. Please check your connection.', 'error');
+                    console.error('API connection error:', error);
+                }
+            }
+            
+            function updateApiStatus(status) {
+                apiStatus.className = `api-status ${status}`;
+                const statusText = apiStatus.querySelector('.status-text');
+                if (statusText) {
+                    statusText.textContent = status.charAt(0).toUpperCase() + status.slice(1);
+                }
+            }
+            
+            function handleUserInput() {
+                const message = userInput.value.trim();
+                if (message === '' || isTyping) return;
+                
+                addUserMessage(message);
+                userInput.value = '';
+                userInput.style.height = '60px';
+                userInput.focus();
+                
+                // Add to conversation history
+                conversationHistory.push({
+                    role: 'user',
+                    content: message
+                });
+                
+                // Process response
+                processUserMessage(message);
+            }
+            
+            async function processUserMessage(message) {
+                showTypingIndicator();
+                
+                try {
+                    if (apiAvailable) {
+                        const response = await callGeminiAPI(message);
+                        hideTypingIndicator();
+                        
+                        if (response) {
+                            addBotMessage(formatResponse(response));
+                            
+                            // Add to conversation history
+                            conversationHistory.push({
+                                role: 'assistant',
+                                content: response
+                            });
+                        } else {
+                            throw new Error('Empty response from API');
+                        }
+                    } else {
+                        // Fallback for offline mode
+                        setTimeout(() => {
+                            hideTypingIndicator();
+                            const fallbackResponse = getFallbackResponse(message);
+                            addBotMessage(fallbackResponse);
+                            
+                            // Add to conversation history
+                            conversationHistory.push({
+                                role: 'assistant',
+                                content: fallbackResponse
+                            });
+                        }, 1500);
+                    }
+                } catch (error) {
+                    hideTypingIndicator();
+                    console.error('Error processing message:', error);
+                    
+                    addBotMessage(`<p>I apologize, but I encountered an error processing your request. Please try again or check your connection.</p>`);
+                    showNotification('Error processing your request. Please try again.', 'error');
+                }
+            }
+            
+            async function callGeminiAPI(message) {
+                try {
+                    // Create prompt with conversation history for context
+                    let prompt = INITIAL_PROMPT + "\n\nConversation history:\n";
+                    
+                    // Add last few messages for context (limit to keep prompt size reasonable)
+                    const recentHistory = conversationHistory.slice(-6);
+                    for (const msg of recentHistory) {
+                        prompt += `${msg.role === 'user' ? 'User' : 'Assistant'}: ${msg.content}\n`;
+                    }
+                    
+                    // Add current message with instructions to format responses
+                    prompt += `\nUser: ${message}\n\nAssistant: 
+                    Please respond with information about Indian law related to this query. 
+                    When appropriate, use **bold** for important terms, *italics* for emphasis, 
+                    and cite relevant laws, sections, or cases. Format your response clearly with 
+                    headings and lists where appropriate.`;
+                    
+                    const response = await fetch(API_URL, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            prompt: prompt,
+                            temperature: 0.2,
+                            maxOutputTokens: 1024
+                        })
+                    });
+                    
+                    if (!response.ok) {
+                        throw new Error(`API request failed with status ${response.status}`);
+                    }
+                    
+                    const data = await response.json();
+                    
+                    if (data.candidates && data.candidates[0] && data.candidates[0].content && 
+                        data.candidates[0].content.parts && data.candidates[0].content.parts[0]) {
+                        return data.candidates[0].content.parts[0].text;
+                    } else {
+                        throw new Error('Invalid API response structure');
+                    }
+                } catch (error) {
+                    console.error('Error calling Gemini API:', error);
+                    apiAvailable = false;
+                    updateApiStatus('offline');
+                    showNotification('API connection lost. Running in offline mode.', 'error');
+                    return null;
+                }
+            }
+            
+            function getFallbackResponse(message) {
+                // Simple offline fallback responses for demo purposes
+                const lowerMessage = message.toLowerCase();
+                
+                if (lowerMessage.includes('rental') || lowerMessage.includes('rent') || lowerMessage.includes('tenant')) {
+                    return `<h3>Rental Laws in India</h3>
+                    <p>Rental agreements in India are governed by the Rent Control Acts of respective states. Here are some key points:</p>
+                    <ul>
+                        <li>Most residential tenancies use a lease agreement or rent agreement for 11 months</li>
+                        <li>Registration is mandatory for agreements of 12 months or longer under **Section 17** of the Registration Act, 1908</li>
+                        <li>Security deposits vary by state (typically 2-3 months' rent in Delhi/Mumbai, up to 10 months in Bangalore)</li>
+                        <li>The **Model Tenancy Act 2021** aims to regulate renting of premises in an efficient manner</li>
+                    </ul>
+                    <div class="legal-reference">
+                        <div class="legal-reference-title">Note:</div>
+                        <p>This information is based on general provisions. Please check your state's specific Rent Control Act for detailed regulations.</p>
+                    </div>`;
+                } else if (lowerMessage.includes('divorce') || lowerMessage.includes('marriage')) {
+                    return `<h3>Marriage and Divorce Laws in India</h3>
+                    <p>Indian marriage and divorce laws vary based on religion:</p>
+                    <ul>
+                        <li><strong>Hindu Marriage Act, 1955:</strong> Governs marriages for Hindus, Buddhists, Jains, and Sikhs</li>
+                        <li><strong>Muslim Personal Law:</strong> Follows Islamic law principles for marriage and divorce</li>
+                        <li><strong>Special Marriage Act, 1954:</strong> For inter-religious marriages or those who choose civil marriage</li>
+                        <li><strong>Divorce grounds:</strong> Generally include cruelty, desertion, conversion to another religion, mental illness, etc.</li>
+                    </ul>
+                    <p>The divorce process typically involves filing a petition, mediation attempts, and court hearings.</p>`;
+                } else if (lowerMessage.includes('will') || lowerMessage.includes('inherit') || lowerMessage.includes('succession')) {
+                    return `<h3>Inheritance and Succession Laws in India</h3>
+                    <p>Inheritance laws in India vary based on religion:</p>
+                    <ul>
+                        <li><strong>Hindu Succession Act, 1956 (amended 2005):</strong> Governs succession for Hindus, giving equal rights to sons and daughters</li>
+                        <li><strong>Muslim Personal Law:</strong> Follows Sharia principles for inheritance</li>
+                        <li><strong>Indian Succession Act, 1925:</strong> Applies to Christians, Parsis, and others</li>
+                    </ul>
+                    <p>A properly executed Will can override the intestate succession laws. To be valid, a Will should be:</p>
+                    <ul>
+                        <li>Made by a person of sound mind, above 18 years</li>
+                        <li>Signed by the testator in presence of at least two witnesses</li>
+                        <li>Witnesses should sign in presence of the testator</li>
+                    </ul>`;
+                } else if (lowerMessage.includes('rti') || lowerMessage.includes('right to information')) {
+                    return `<h3>Right to Information (RTI) in India</h3>
+                    <p>The **Right to Information Act, 2005** empowers citizens to request information from public authorities:</p>
+                    <ul>
+                        <li>Any citizen can request information from a "public authority"</li>
+                        <li>Public authorities must respond within 30 days</li>
+                        <li>Application fee is nominal (usually Rs. 10)</li>
+                        <li>Information concerning life and liberty must be provided within 48 hours</li>
+                    </ul>
+                    <p>Certain information is exempt under **Section 8**, including national security, trade secrets, and personal privacy.</p>
+                    <div class="citation">RTI Act, 2005 (Act No. 22 of 2005)</div>`;
+                } else {
+                    return `<p>I'm currently in offline mode and have limited information on this topic. Please try again when the API connection is restored for more detailed information about Indian law.</p>
+                    <p>You can ask about rental laws, marriage and divorce, inheritance, or RTI while in offline mode.</p>`;
+                }
+            }
+            
+            function formatResponse(response) {
+                // Format the response with proper HTML styling
+                // This helps with preserving formatting from the API
+                let formattedResponse = response;
+                
+                // Convert markdown-style headers to HTML
+                formattedResponse = formattedResponse.replace(/^### (.*$)/gim, '<h3>$1</h3>');
+                formattedResponse = formattedResponse.replace(/^## (.*$)/gim, '<h3>$1</h3>');
+                formattedResponse = formattedResponse.replace(/^# (.*$)/gim, '<h3>$1</h3>');
+                
+                // Convert bold text (** **) to <strong> tags - use non-greedy matching to prevent overlapping matches
+                formattedResponse = formattedResponse.replace(/\*\*([\s\S]*?)\*\*/g, '<strong>$1</strong>');
+                
+                // Convert italic text (* *) to <em> tags
+                formattedResponse = formattedResponse.replace(/\b\*([\s\S]*?)\*\b/g, '<em>$1</em>');
+                
+                // Convert markdown-style lists
+                formattedResponse = formattedResponse.replace(/^\* (.*$)/gim, '<li>$1</li>');
+                formattedResponse = formattedResponse.replace(/^- (.*$)/gim, '<li>$1</li>');
+                formattedResponse = formattedResponse.replace(/^\d+\. (.*$)/gim, '<li>$1</li>');
+                
+                // Handle markdown links [text](url)
+                formattedResponse = formattedResponse.replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank">$1</a>');
+                
+                // Handle code blocks with backticks
+                formattedResponse = formattedResponse.replace(/`(.*?)`/g, '<code>$1</code>');
+                
+                // Wrap lists in proper HTML tags
+                formattedResponse = formattedResponse.replace(/<li>(.*?)<\/li>/g, function(match) {
+                    return match;
+                });
+                
+                // Replace multiple newlines with paragraph breaks
+                formattedResponse = formattedResponse.replace(/\n\s*\n/g, '</p><p>');
+                
+                // Replace single newlines with <br>
+                formattedResponse = formattedResponse.replace(/\n/g, '<br>');
+                
+                // Wrap in paragraph tags if not already
+                if (!formattedResponse.includes('<p>')) {
+                    formattedResponse = '<p>' + formattedResponse + '</p>';
+                }
+                
+                // Fix any unclosed paragraphs
+                const openTags = (formattedResponse.match(/<p>/g) || []).length;
+                const closeTags = (formattedResponse.match(/<\/p>/g) || []).length;
+                
+                if (openTags > closeTags) {
+                    formattedResponse += '</p>'.repeat(openTags - closeTags);
+                }
+                
+                // Wrap any list items that aren't in a list
+                if (formattedResponse.includes('<li>') && !formattedResponse.includes('<ul>')) {
+                    formattedResponse = formattedResponse.replace(/(<li>.*?<\/li>)+/g, '<ul>$&</ul>');
+                }
+                
+                return formattedResponse;
+            }
+            
+            function addUserMessage(message) {
+                const timestamp = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+                
+                const messageElement = document.createElement('div');
+                messageElement.className = 'message user-message';
+                
+                messageElement.innerHTML = `
+                    <div class="message-content">${message}</div>
+                    <div class="message-time">${timestamp}</div>
+                `;
+                
+                chatMessages.appendChild(messageElement);
+                scrollToBottom();
+            }
+            
+            function addBotMessage(message) {
+                const timestamp = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+                
+                const messageElement = document.createElement('div');
+                messageElement.className = 'message bot-message';
+                
+                messageElement.innerHTML = `
+                    <div class="message-content">${message}</div>
+                    <div class="message-time">${timestamp}</div>
+                `;
+                
+                chatMessages.appendChild(messageElement);
+                scrollToBottom();
+            }
+            
+            function showTypingIndicator() {
+                isTyping = true;
+                
+                const typingIndicator = document.createElement('div');
+                typingIndicator.className = 'message-typing';
+                typingIndicator.id = 'typingIndicator';
+                
+                typingIndicator.innerHTML = `
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                `;
+                
+                chatMessages.appendChild(typingIndicator);
+                scrollToBottom();
+            }
+            
+            function hideTypingIndicator() {
+                isTyping = false;
+                const typingIndicator = document.getElementById('typingIndicator');
+                if (typingIndicator) {
+                    typingIndicator.remove();
+                }
+            }
+            
+            function scrollToBottom() {
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+            
+            function showNotification(message, type = 'info') {
+                // Create notification element
+                const notification = document.createElement('div');
+                notification.className = `notification ${type}`;
+                notification.textContent = message;
+                
+                // Add to DOM
+                document.body.appendChild(notification);
+                
+                // Show notification
+                setTimeout(() => {
+                    notification.classList.add('show');
+                }, 10);
+                
+                // Remove after delay
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                    setTimeout(() => {
+                        notification.remove();
+                    }, 300);
+                }, 3000);
+            }
+            
+            function exportChatHistory() {
+                try {
+                    // Create exportable chat content
+                    let chatContent = "# LegalAssist AI Chat History\n";
+                    chatContent += `Exported on: ${new Date().toLocaleString()}\n\n`;
+                    
+                    conversationHistory.forEach(message => {
+                        const role = message.role === 'user' ? 'You' : 'LegalAssist AI';
+                        
+                        // Safely extract content
+                        let content = message.content || '';
+                        
+                        // Strip HTML tags for plain text export
+                        if (typeof content === 'string') {
+                            content = content.replace(/<[^>]*>?/gm, '');
+                        }
+                        
+                        chatContent += `## ${role}:\n${content}\n\n`;
+                    });
+                    
+                    // Create download link
+                    const blob = new Blob([chatContent], { type: 'text/plain' });
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.style.display = 'none';
+                    a.href = url;
+                    a.download = `legal-assist-chat-${Date.now()}.txt`;
+                    
+                    // Trigger download
+                    document.body.appendChild(a);
+                    a.click();
+                    
+                    // Cleanup
+                    window.URL.revokeObjectURL(url);
+                    document.body.removeChild(a);
+                    
+                    showNotification('Chat history exported successfully!', 'success');
+                } catch (error) {
+                    console.error('Export error:', error);
+                    showNotification('Error exporting chat history', 'error');
+                }
+            }
+        });
+    </script>
+</body>
+</html>
